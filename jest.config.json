@@ -1,0 +1,7 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "coverageDirectory": "./coverage/",
+  "collectCoverage": true
+}
