@@ -1,5 +1,9 @@
 .DS_Store
 
 node_modules
-/coverage
-/public
+coverage
+
+public/index.html
+public/js
+
+
