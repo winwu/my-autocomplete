@@ -38,7 +38,7 @@ const Utils = {
     },
     removeClass: function(el: any, classNameToRemove: string) {
         var elClass = ' ' + el.className + ' ';
-        while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
+        while (elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
             elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
         }
         el.className = elClass;
