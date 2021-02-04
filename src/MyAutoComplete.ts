@@ -1,6 +1,6 @@
-import utils from './helpers/Utils';
-import LocalStorageHandler from './helpers/LocalStorageHandler';
-import Item from './Item';
+import utils from './helpers/Utils.js';
+import LocalStorageHandler from './helpers/LocalStorageHandler.js';
+import Item from './Item.js';
 
 class MyAutoComplete {
     private requestUrl: string = '';
@@ -9,12 +9,12 @@ class MyAutoComplete {
     private searchInput: HTMLInputElement | undefined;
     private listContainer: HTMLElement = document.createElement('div');
     private lists: any[] = [];
-	private total: number = 0; // @TODO
+    private total: number = 0; // @TODO
 
     private _store: any;  // @TODO
-	private _current: number = -1;
+    private _current: number = -1;
     private _timerForInput: number = 0;
-	private _timerForKeyDown: number = 0;
+    private _timerForKeyDown: number = 0;
 
     constructor(options: {
         requestUrl: string,
@@ -395,3 +395,6 @@ class MyAutoComplete {
         }
     }
 }
+
+// exports.default = MyAutoComplete;
+export default MyAutoComplete;

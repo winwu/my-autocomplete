@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "winwu",
-  "main": "public/js/index.js",
-  "types": "public/js/index.d.ts",
+  "main": "",
   "scripts": {
     "test": "jest --config jest.config.json",
     "build": "tsc",
