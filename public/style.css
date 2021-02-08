@@ -1,0 +1,139 @@
+html {
+    touch-action: manipulation;
+}
+
+input {
+    -webkit-appearance: none;
+}
+
+body {
+    font-family: "Microsoft JhengHei", "Arial";
+    color: #444;
+    font-size: 16px;
+}
+
+.searchbar {
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    position: relative;
+}
+
+.searchbar .list_container {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    display: block;
+    top: auto;
+}
+
+.searchbar .input_text,
+.searchbar input {
+    display: block;
+}
+
+.searchbar input {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border: solid 1px #c8c8c8;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.searchbar ul {
+    display: none;
+    background: #fff;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #eee;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.searchbar ul.active, .searchbar ul:focus {
+    display: block;
+}
+
+.searchbar ul li {
+    display: block;
+}
+
+.searchbar ul li:focus .app_item {
+    background: #eee;
+}
+
+.searchbar ul .app_item {
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    padding: 5px 10px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.searchbar ul .app_item:hover, .searchbar ul .app_item:focus {
+    background: #eee;
+}
+
+.searchbar ul .app_item.is_in_history {
+    background-color: #f3f7f6;
+}
+
+.searchbar ul .app_item .app_item_left {
+    position: absolute;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+    display: block;
+    top: 50%;
+    margin-top: -18px;
+}
+
+.searchbar ul .app_item .app_item_left img {
+    width: 100%;
+    max-width: 100%;
+}
+
+.searchbar ul .app_item .app_item_right {
+    margin-left: 45px;
+    min-height: 36px;
+    margin-right: 26px;
+}
+
+.searchbar ul .app_item .app_item_right .app_title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+.searchbar ul .app_item .app_item_right .remove {
+    position: absolute;
+    right: 10px;
+    display: block;
+    font-style: normal;
+    background: #9E9E9E;
+    color: #FFF;
+    width: 60px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    top: 10px;
+    border: none;
+    box-sizing: border-box;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.searchbar ul .app_item .app_item_right .remove:hover {
+    background: rgba(14, 202, 97, 0.6);
+}
