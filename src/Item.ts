@@ -24,8 +24,8 @@ class Item {
     }
 
     render() {
-        let isShow = this.visible || false;
-        let isInHistroy: boolean = this.ts && this.ts > 0 ? true : false;
+        const isShow = this.visible || false;
+        const isInHistroy: boolean = this.ts && this.ts > 0 ? true : false;
 
         if (isShow === false) {
             return '';

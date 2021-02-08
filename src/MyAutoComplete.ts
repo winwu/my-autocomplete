@@ -51,7 +51,7 @@ class MyAutoComplete {
             .then(r => r.json())
             .then(data => {
                 if (data && data.items) {
-                    let newList: any[] = [];
+                    const newList: any[] = [];
                     data.items.map((item: any) => {
                         // turn object to Item instance.
                         newList.push(new Item(item));
@@ -74,10 +74,10 @@ class MyAutoComplete {
         * if localstorage have record, get timestamp from localstorage, else create an Object in localstorage.
         */
        this._store = new LocalStorageHandler(this.storeNameSpace);
-       let initToLs: any = {};
-       let dataFormLs = this._store.getAll();
+       const initToLs: any = {};
+       const dataFormLs = this._store.getAll();
        if (this.lists) {
-           this.lists.map(function(app) {
+           this.lists.map((app) => {
                if (dataFormLs && dataFormLs.hasOwnProperty(app.id)) {
                    app.ts = dataFormLs[app.id];
                } else {
@@ -147,7 +147,7 @@ class MyAutoComplete {
     }
 
     inputChangeHandler(e: { target: any; }) {
-        let val = e.target.value;
+        const val = e.target.value;
         // debunce event trigger
         window.clearTimeout(this._timerForInput);
         this._timerForInput = window.setTimeout(() => {
@@ -161,22 +161,24 @@ class MyAutoComplete {
     listMouseDownHandler(e: any) {
         e.stopPropagation();
         // safari need to  uese composedPath.
-        var path = e.path || (e.composedPath && e.composedPath());
+        const path = e.path || (e.composedPath && e.composedPath());
 
         let targetCode = null;
         let targetEle = null;
         let id = null;
 
-        for (let index in path) {
-            if (utils.hasClass(path[index], 'remove')) {
-                targetCode = 'REMOVE';
-                targetEle = path[index];
-                break;
-            }
-            if (utils.hasClass(path[index], 'app_item')) {
-                targetCode = 'APP_ITEM';
-                targetEle = path[index];
-                break;
+        for (const index in path) {
+            if (path[index]) {
+                if (utils.hasClass(path[index], 'remove')) {
+                    targetCode = 'REMOVE';
+                    targetEle = path[index];
+                    break;
+                }
+                if (utils.hasClass(path[index], 'app_item')) {
+                    targetCode = 'APP_ITEM';
+                    targetEle = path[index];
+                    break;
+                }
             }
         }
 
@@ -196,7 +198,7 @@ class MyAutoComplete {
             case 'REMOVE':
                 // prevent ul to be closed.
                 e.preventDefault();
-                var item = this.findItemInLists(id);
+                const item = this.findItemInLists(id);
                 if (item) {
                     ts = 0;
                     this._store.update(id, ts);
@@ -218,8 +220,8 @@ class MyAutoComplete {
                     }
                     
                     // reset all as visible
-                    this.lists.map((app) => {
-                        app.visible = true;
+                    this.lists.map((app2) => {
+                        app2.visible = true;
                     });
 
                     this.reRender();
@@ -236,8 +238,8 @@ class MyAutoComplete {
         
         const lis = this.listContainer?.querySelector('ul')?.getElementsByTagName("li");
         // let totalLisCount = [...e.target.parentElement.children].length;
-        let totalLisCount = lis?.length ?? 0;
-        let code = e.keyCode ? +e.keyCode : +e.which;
+        const totalLisCount = lis?.length ?? 0;
+        const code = e.keyCode ? +e.keyCode : +e.which;
 
         switch (code) {
             case 38: // up
@@ -258,7 +260,7 @@ class MyAutoComplete {
                 break;
             case 13: // Enter
                 if (e.target.querySelector('.app_item')) {
-                    let id = e.target.querySelector('.app_item').getAttribute('data-id');
+                    const id = e.target.querySelector('.app_item').getAttribute('data-id');
 
                     if (!id) {
                         return;
@@ -267,7 +269,7 @@ class MyAutoComplete {
                     // update current index
                     this._current = 0;
 
-                    let ts = Date.now();
+                    const ts = Date.now();
 
                     this.itemOnHit(id, ts, (app: any) => {
                         // append new string to input.
@@ -283,8 +285,8 @@ class MyAutoComplete {
                         this.searchInput?.blur();
 
                         // reset all as visible
-                        this.lists.map((app) => {
-                            app.visible = true;
+                        this.lists.map((app2) => {
+                            app2.visible = true;
                         });
 
                         this.reRender();
@@ -301,7 +303,7 @@ class MyAutoComplete {
         }
 
         if (lis) {
-            for (var i = 0; i < totalLisCount; i++) {
+            for (let i = 0; i < totalLisCount; i++) {
                 if (this._current === i) {
                     lis[i].tabIndex = 0;
                     lis[i].focus();
@@ -313,7 +315,7 @@ class MyAutoComplete {
     }
 
     inputKeyDownHandler(e: { keyCode: string | number; which: string | number; }) {
-        let code = e.keyCode ? +e.keyCode : +e.which;
+        const code = e.keyCode ? +e.keyCode : +e.which;
         // debunce event trigger
         window.clearTimeout(this._timerForKeyDown);
     
@@ -349,14 +351,14 @@ class MyAutoComplete {
 
     filterLists(val: string) {
         // trim empty string and lowercase
-        let compareString = val.replace(/\s+/g,'').toLocaleLowerCase();
+        const compareString = val.replace(/\s+/g,'').toLocaleLowerCase();
 
         this.lists.map((item) => {
             if (compareString === null || compareString === '') {
                 // no need filter, show all item.
                 item.visible = true;
             } else {
-                let name = item.name.toLocaleLowerCase();
+                const name = item.name.toLocaleLowerCase();
                 item.visible = name.includes(compareString);
             }
         });
@@ -378,12 +380,12 @@ class MyAutoComplete {
         return item;
     }
 
-    itemOnHit(id: string, timeStamp = Date.now(), cb: null | Function = null) {
+    itemOnHit(id: string, timeStamp = Date.now(), cb: null | Function) {
         /*
          * action to be when item be hit (by ckick or keyboard enter)
          * @param {Object} item -  current item object.
          */
-        let item = this.findItemInLists(id);
+        const item = this.findItemInLists(id);
         if (item) {
             // both update store and original list.
             this._store.update(id, timeStamp);

@@ -1,6 +1,6 @@
 const Utils = {
-    sortAryByKey: function(ary: number[], key: string) {
-        return ary.sort(function (a: any, b: any) {
+    sortAryByKey: (ary: number[], key: string) => {
+        return ary.sort((a: any, b: any) => {
             if (a[key] < b[key]) {
                 return 1;
             }
@@ -11,15 +11,15 @@ const Utils = {
             return 0;
         });
     },
-    hasClass: function(elem: any, compareClassName: string) {
+    hasClass: (elem: any, compareClassName: string) => {
         if (elem.className && elem.className !== '') {
             return elem.className.split(' ').indexOf(compareClassName) > -1;
         } else {
             return false;
         }
     },
-    escapeHtml: function(string: string) {
-        var excapeMap: { [excapeText: string]: string } = {
+    escapeHtml: (str: string) => {
+        const excapeMap: { [excapeText: string]: string } = {
             '&': '&amp;',
             '<': '&lt;',
             '>': '&gt;',
@@ -29,15 +29,15 @@ const Utils = {
             '`': '&#x60;',
             '=': '&#x3D;'
         };
-        return String(string).replace(/[&<>"'`=\/]/g, function(s) {
+        return String(str).replace(/[&<>"'`=\/]/g, (s) => {
             return excapeMap[s];
         });
     },
-    addClass: function(el: any, classNameToAdd: string) {
+    addClass: (el: any, classNameToAdd: string) => {
         el.className += ' ' + classNameToAdd;
     },
-    removeClass: function(el: any, classNameToRemove: string) {
-        var elClass = ' ' + el.className + ' ';
+    removeClass: (el: any, classNameToRemove: string) => {
+        let elClass = ' ' + el.className + ' ';
         while (elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
             elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
         }
