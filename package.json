@@ -8,7 +8,7 @@
     "test": "jest --config jest.config.json",
     "build": "tsc",
     "watch": "tsc -w",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --config .prettierrc  --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "lite": "lite-server --baseDir=\"public\"",
     "start": "concurrently \"npm run watch\" \"npm run lite\" "

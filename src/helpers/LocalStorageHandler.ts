@@ -1,48 +1,34 @@
+/**
+ * handle different myAutoComplete's search history in window.localshorage.
+ */
+
 class LocalStorageHandler {
-	/*
-	 * LocalStorageHandler Class
-	 * for handle different myAutoComplete's search history in window.localshorage.
-	 * @constructor
-	 * @param {String} - a name as key to store data in localstorage.
-	 */
+    private store: any = window.localStorage
+    private title: string
 
-	private _ls: any;
-	private _namespace: string;
+    constructor(title: string) {
+        this.title = title || `random_ns_${Math.random().toString(36).substring(5)}`
+    }
 
-	constructor(itemNameSpace: string) {
-		this._ls = window.localStorage;
-		this._namespace = itemNameSpace || `random_ns_${Math.random().toString(36).substring(5)}`;
-	}
+    initObject(obj: { [appIndex: string]: number | string }) {
+        this.store.setItem(this.title, JSON.stringify(obj))
+    }
 
-	/*
-     * @param {Object} - object save in localstorage.
-	 */
-	initObject(obj: any) {
-		this._ls.setItem(this._namespace, JSON.stringify(obj));
-	}
+    getAll() {
+        return JSON.parse(this.store.getItem(this.title))
+    }
 
-	/*
-     * @return {Object} - return Object in this._namespace
-	 */
-	getAll() {
-		return JSON.parse(this._ls.getItem(this._namespace));
-	}
+    update(id: string, timestamp: number) {
+        const data: any = this.getAll()
+        if (data.hasOwnProperty(id)) {
+            data[id] = timestamp
+        }
+        this.store.setItem(this.title, JSON.stringify(data))
+    }
 
-	/*
-	 * Update specific id's timestamp(ts)
-	 */
-	update(id: string, ts: string) {
-		// update ts for app which be hit.
-		const data: any = this.getAll();
-		if (data.hasOwnProperty(id)) {
-			data[id] = ts;
-		}
-		this._ls.setItem(this._namespace, JSON.stringify(data));
-	}
-
-	clear() {
-		this._ls.removeItem(this._namespace);
-	}
+    clear() {
+        this.store.removeItem(this.title)
+    }
 }
 
-export default LocalStorageHandler;
+export default LocalStorageHandler
