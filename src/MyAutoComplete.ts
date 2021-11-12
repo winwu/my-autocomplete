@@ -393,4 +393,4 @@ class MyAutoComplete {
 }
 
 // exports.default = MyAutoComplete;
-export default MyAutoComplete;
+export { MyAutoComplete };
